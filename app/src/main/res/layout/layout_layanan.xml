@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <ImageView
+        android:id="@+id/imageView1.1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/icon_layanan" />
+
+    <TextView
+        android:id="@+id/text_layanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView1.1"
+        android:layout_centerHorizontal="true"
+        android:text="Pilih Layanan"
+        android:textSize="23sp"
+        android:textColor="#4b64e8"
+        app:fontFamily="@font/poppins_medium" />
+
+    <ScrollView
+        android:id="@+id/linear_layanan"
+        android:layout_below="@id/text_layanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_below="@id/text_layanan">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/card_view_self_drive"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        android:padding="5dp"
+                        android:id="@+id/image_self_drive"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:srcCompat="@drawable/self_drive" />
+
+                    <TextView
+                        android:id="@+id/text_self_drive"
+                        android:layout_width="wrap_content"
+                        android:layout_toRightOf="@id/image_self_drive"
+                        android:layout_height="wrap_content"
+                        android:text="Self Drive"
+                        android:layout_marginRight="50dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        app:fontFamily="@font/poppins_medium" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/card_view_car_carrier"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        android:id="@+id/image_car_carrier"
+                        android:padding="2dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:srcCompat="@drawable/car_carrier" />
+
+                    <TextView
+                        android:id="@+id/text_car_carrier"
+                        android:layout_width="wrap_content"
+                        android:layout_toRightOf="@id/image_car_carrier"
+                        android:layout_height="wrap_content"
+                        android:text="Car Carrier"
+                        android:layout_marginRight="50dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        app:fontFamily="@font/poppins_medium" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/card_view_kapal_roro"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        android:id="@+id/image_kapal_roro"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:srcCompat="@drawable/kapal_roro" />
+
+                    <TextView
+                        android:id="@+id/text_kapal_roro"
+                        android:layout_width="wrap_content"
+                        android:layout_toRightOf="@id/image_kapal_roro"
+                        android:layout_height="wrap_content"
+                        android:text="Kapal Roro"
+                        android:layout_marginRight="50dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        app:fontFamily="@font/poppins_medium" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/card_view_towing"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        android:id="@+id/image_towing"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:srcCompat="@drawable/towing" />
+
+                    <TextView
+                        android:id="@+id/text_towing"
+                        android:layout_width="wrap_content"
+                        android:layout_toRightOf="@id/image_towing"
+                        android:layout_height="wrap_content"
+                        android:text="Towing"
+                        android:layout_marginRight="50dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        app:fontFamily="@font/poppins_medium" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/card_view_container"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        android:id="@+id/image_container"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:srcCompat="@drawable/container" />
+
+                    <TextView
+                        android:id="@+id/text_container"
+                        android:layout_width="wrap_content"
+                        android:layout_toRightOf="@id/image_container"
+                        android:layout_height="wrap_content"
+                        android:text="Container"
+                        android:layout_marginRight="50dp"
+                        android:layout_centerVertical="true"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        app:fontFamily="@font/poppins_medium" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:background="@color/white"
+                android:text="Kembali"
+                android:id="@+id/btn_back_layanan"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="10sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:layout_marginTop="5dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

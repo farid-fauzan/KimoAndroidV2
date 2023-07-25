@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <ImageView
+        android:id="@+id/image_view_detail_pesanan"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:padding="8dp"
+        app:srcCompat="@drawable/icon_verifikasi" />
+
+    <TextView
+        android:id="@+id/text_detail_pesanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view_detail_pesanan"
+        android:layout_centerHorizontal="true"
+        android:text="Verifikasi Detail Pesanan"
+        android:textSize="23sp"
+        android:textColor="#4b64e8"
+        app:fontFamily="@font/poppins_medium" />
+
+    <ScrollView
+        android:id="@+id/linear_pesanan"
+        android:layout_below="@id/text_detail_pesanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            >
+
+            <TextView
+                android:id="@+id/text_view_keterangan_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:padding="10dp"
+                android:textColor="#A6A6A6"
+                android:text="Periksa kembali informasi pemesanan Anda, Anda dapat kembali untuk mengeditnya atau klik tombol 'Proses' untuk mengonfirmasi pemesanan Anda."
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <include
+                layout="@layout/item_detail_pesanan"
+                android:id="@+id/include_pesanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <Button
+                    android:id="@+id/btn_back_pesanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="Kembali"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/btn_next_pesanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@color/blue_kimo_button"
+                    android:gravity="center"
+                    android:text="Proses"
+                    android:textColor="@color/white"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:layout_marginTop="5dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

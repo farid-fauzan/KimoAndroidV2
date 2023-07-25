@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <ImageView
+        android:id="@+id/image_view_detail_konfirmasi"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:padding="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/icon_verifikasi" />
+
+    <TextView
+        android:id="@+id/text_detail_konfirmasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view_detail_konfirmasi"
+        android:layout_centerHorizontal="true"
+        android:text="Konfirmasi Pesanan"
+        android:textSize="23sp"
+        android:textColor="#4b64e8"
+        app:fontFamily="@font/poppins_medium" />
+
+    <ScrollView
+        android:id="@+id/linear_konfirmasi"
+        android:layout_below="@id/text_detail_konfirmasi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:padding="10dp"
+                        android:textColor="#A6A6A6"
+                        android:text="KONFIRMASI #"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_view_kode_booking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="25dp"
+                        android:paddingLeft="10dp"
+                        android:textColor="@color/black"
+                        android:text="57MJTNY"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        />
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="30dp"
+                    app:srcCompat="@drawable/icon_kimo_black" />
+            </RelativeLayout>
+
+            <include
+                layout="@layout/item_detail_pesanan"
+                android:id="@+id/include_konfirmasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <Button
+                    android:id="@+id/btn_next_konfirmasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@color/blue_kimo_button"
+                    android:gravity="center"
+                    android:text="Cek Booking"
+                    android:textColor="@color/white"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                android:layout_marginTop="5dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

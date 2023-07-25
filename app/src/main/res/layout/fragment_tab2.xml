@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_tab2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/bg"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <RelativeLayout
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#00008577"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="16dp"
+                android:text="List Pesanan"
+                android:textSize="30sp"
+                android:textColor="#4b64e8"
+                app:fontFamily="@font/poppins_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/blue_kimo_button"
+                app:fontFamily="@font/poppins_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                <RelativeLayout
+                    android:id="@+id/relative_list_pesanan"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@color/white">
+
+                    <include
+                        layout="@layout/layout_list_pesanan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_invoice"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@color/white"
+                    android:layout_weight="1">
+
+
+                <include
+                    layout="@layout/layout_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_map"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@color/white"
+                    android:layout_weight="1">
+
+
+                    <include
+                        layout="@layout/layout_map"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</FrameLayout>

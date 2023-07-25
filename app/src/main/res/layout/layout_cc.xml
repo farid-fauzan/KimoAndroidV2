@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:background="@color/white"
+    >
+    <ImageView
+        android:id="@+id/image_view_extra_cc"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/icon_extra" />
+
+    <TextView
+        android:id="@+id/text_cc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view_extra_cc"
+        android:layout_centerHorizontal="true"
+        android:text="Extra CC"
+        android:textSize="23sp"
+        android:textColor="#4b64e8"
+        app:fontFamily="@font/poppins_medium" />
+
+    <LinearLayout
+        android:id="@+id/linear_cc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_below="@id/text_cc">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_cc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                >
+                <ImageView
+                    android:id="@+id/image_view_cc"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:srcCompat="@drawable/cc" />
+
+                <TextView
+                    android:id="@+id/text_view_cc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/image_view_cc"
+                    android:text="Diatas 2000CC"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    app:fontFamily="@font/poppins_medium" />
+                <TextView
+                    android:id="@+id/text_harga_cc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:layout_below="@id/text_view_cc"
+                    android:layout_toRightOf="@id/image_view_cc"
+                    android:text="Rp500,000,-"
+                    android:textColor="@android:color/holo_blue_dark"
+                    />
+
+                <TextView
+                    android:id="@+id/text_view_keterangan_cc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/image_view_cc"
+                    android:text="Pilih jika kendaraan anda diatas 2000cc"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/text_harga_cc"
+                    android:textSize="10sp"
+                    android:textColor="#A6A6A6"
+                    app:fontFamily="@font/poppins_medium" />
+
+
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/cb_cc"
+                    />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_back_cc"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="Kembali"
+        android:textColor="@color/black"
+        android:layout_below="@id/linear_cc"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="10sp" />
+
+    <Button
+        android:id="@+id/btn_next_cc"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@color/blue_kimo_button"
+        android:gravity="center"
+        android:text="Selanjutnya"
+        android:textColor="@color/white"
+        android:layout_below="@id/linear_cc"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="10sp" />
+
+</RelativeLayout>

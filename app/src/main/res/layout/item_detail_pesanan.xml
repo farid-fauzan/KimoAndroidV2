@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/text_view_keterangan_info_pemesanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/blue_kimo_button"
+        android:text="Info Pesanan"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blue_kimo_button"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="TANGGAL:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_tanggal_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="19 Apr 2023"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="JAM:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_jam_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="10:00AM"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#90A6A6A6"
+        android:layout_marginTop="5dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="ZONA WAKTU:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_zona_waktu_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="Asia/Jakarta"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="TUJUAN:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_tujuan_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="Bali"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#90A6A6A6"
+        android:layout_marginTop="5dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="LOCATION:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_lokasi_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="DKI Jakarta"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="EXTRA CC:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_extra_cc_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="Diatas 2000cc"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#90A6A6A6"
+        android:layout_marginTop="5dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="LAYANAN PENGIRIMAN:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_layanan_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="Self Drive"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#90A6A6A6"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/text_view_keterangan_info_customer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/blue_kimo_button"
+        android:text="Info Customer"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blue_kimo_button"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="NAMA:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_nama_customer_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="Farid Fauzan"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="TELEPON:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_telepon_customer_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="080000000000"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#90A6A6A6"
+        android:layout_marginTop="5dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="EMAIL:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_email_customer_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="farid.fauzan93@gmail.com"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#90A6A6A6"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/text_view_keterangan_info_pembayaran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/blue_kimo_button"
+        android:text="Info Pesanan"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/blue_kimo_button"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#A6A6A6"
+                android:text="HARGA TOTAL:"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+            <TextView
+                android:id="@+id/text_view_detail_harga_total_verifikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/black"
+                android:text="Rp4,100,000,-"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#90A6A6A6"
+        android:layout_marginTop="5dp"
+        />
+</LinearLayout>

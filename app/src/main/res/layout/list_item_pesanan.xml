@@ -1,0 +1,141 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_weight="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#90A6A6A6"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+            android:id="@+id/text_lokasi_tujuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_marginTop="18dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:text="Padang"
+            android:textColor="@color/black"
+            />
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:background="#90A6A6A6"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            />-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="Tanggal"
+                android:textColor="#A6A6A6"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:padding="8dp" />
+            <TextView
+                android:id="@+id/text_tanggal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="19 Apr, 2023"
+                android:textColor="@android:color/black"
+                android:layout_alignParentEnd="true"
+                android:padding="8dp" />
+        </RelativeLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="Jam"
+                android:textColor="#A6A6A6"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:padding="8dp" />
+            <TextView
+                android:id="@+id/text_jam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="10:00 am"
+                android:textColor="@android:color/black"
+                android:layout_alignParentEnd="true"
+                android:padding="8dp" />
+        </RelativeLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="Agent"
+                android:textColor="#A6A6A6"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:padding="8dp" />
+            <TextView
+                android:id="@+id/text_agent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Faisal Kimo"
+                android:textColor="@android:color/black"
+                android:layout_alignParentEnd="true"
+                android:padding="8dp" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="Status"
+                android:textColor="#A6A6A6"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:padding="8dp" />
+            <TextView
+                android:id="@+id/text_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Payment Pending"
+                android:textColor="@android:color/black"
+                android:layout_alignParentEnd="true"
+                android:padding="8dp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

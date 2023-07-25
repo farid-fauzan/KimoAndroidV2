@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/fragment_tab2">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <RelativeLayout
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/blue_bg"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#00008577"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Mau kirim apa hari ini?"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            app:fontFamily="@font/poppins_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+
+
+            <RelativeLayout
+                android:id="@+id/relative_pilih_lokasi"
+                android:layout_width="0dp"
+                android:visibility="gone"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:layout_weight="1">
+                <include
+                    layout="@layout/layout_lokasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_pilih_layanan"
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:layout_weight="1">
+                <include
+                    layout="@layout/layout_layanan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_pilih_tujuan"
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:layout_weight="1">
+                <include
+                    layout="@layout/layout_tujuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_pilih_tanggal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:layout_weight="1">
+                <include
+                    layout="@layout/layout_tanggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_pilih_cc"
+                android:layout_width="0dp"
+                android:visibility="gone"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:layout_weight="1">
+                <include
+                    layout="@layout/layout_cc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_detail_customer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:layout_weight="1">
+
+                <include
+                    layout="@layout/layout_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_detail_pesanan"
+                android:layout_width="0dp"
+                android:visibility="gone"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:layout_weight="1">
+
+
+                <include
+                    layout="@layout/layout_pesanan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_konfirmasi"
+                android:layout_width="0dp"
+                android:visibility="gone"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:layout_weight="1">
+
+
+                <include
+                    layout="@layout/layout_konfirmasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
+</FrameLayout>
