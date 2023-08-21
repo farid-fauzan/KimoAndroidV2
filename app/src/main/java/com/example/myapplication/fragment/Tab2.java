@@ -1,11 +1,8 @@
 package com.example.myapplication.fragment;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +13,16 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
+import com.example.myapplication.Response.ListPesananResponse;
+import com.example.myapplication.Response.ListPesananResponseData;
+import com.example.myapplication.Response.ResponseDataHandler;
+import com.example.myapplication.Services.ApiService;
+import com.example.myapplication.Services.ParameterLoader;
 import com.example.myapplication.adapter.OrderAdapter;
-import com.example.myapplication.adapter.TujuanAdapter;
 import com.example.myapplication.model.OrderModel;
-import com.example.myapplication.model.TujuanModel;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -42,14 +37,28 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Tab2 extends Fragment implements OnMapReadyCallback{
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private MapView mapView;
+    private ParameterLoader parameterLoader;
     private GoogleMap googleMap;
     private DatabaseReference locationRef;
 
@@ -61,6 +70,7 @@ public class Tab2 extends Fragment implements OnMapReadyCallback{
     public View onCreateView(@NonNull LayoutInflater inflater,
                                                      final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab2, container, false);
+        parameterLoader = new ParameterLoader();
 
         relativeLayoutListPesanan = view.findViewById(R.id.relative_list_pesanan);
         relativeLayoutInvoice = view.findViewById(R.id.relative_invoice);
@@ -106,15 +116,110 @@ public class Tab2 extends Fragment implements OnMapReadyCallback{
 
 
     private void order() {
-        ArrayList<OrderModel> orderModels = new ArrayList<>();
-        orderModels.add(new OrderModel("Bandung", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
-        orderModels.add(new OrderModel("Padang", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
-        orderModels.add(new OrderModel("Bali", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
-        orderModels.add(new OrderModel("Bengkulu", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Pengiriman"));
 
-        OrderAdapter adapter = new OrderAdapter(getActivity(), orderModels);
 
-        listViewOrder.setAdapter(adapter);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(parameterLoader.URL())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+
+        Long customerId = 0L; // Ganti dengan ID customer yang sesuai
+//        Call<ListPesananResponse> call = apiService.getListPesanan(customerId);
+//        call.enqueue(new Callback<ListPesananResponse>() {
+//            @Override
+//            public void onResponse(Call<ListPesananResponse> call, Response<ListPesananResponse> response) {
+//                if (response.isSuccessful()) {
+//                    ListPesananResponse listPesananResponse = response.body();
+//                    List<ListPesananResponseData> pesananList = listPesananResponse.getPesananList();
+//
+//                    ArrayList<OrderModel> orderModels = new ArrayList<>();
+//                    orderModels.add(new OrderModel("Bandung", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
+//                    //        orderModels.add(new OrderModel("Padang", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
+//                    //        orderModels.add(new OrderModel("Bali", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
+//                    //        orderModels.add(new OrderModel("Bengkulu", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Pengiriman"));
+//
+//                    if (pesananList != null && pesananList.size() > 0) {
+//                        for (ListPesananResponseData pesananResponse : pesananList) {
+//                            orderModels.add(new OrderModel(pesananResponse.getLokasiTujuan(), "1 Jan, 0000", "00:00 am",
+//                                    "System", pesananResponse.getStatus()));
+//                            System.out.println("ID Pemesanan: " + pesananResponse.getIdPemesanan());
+//                            System.out.println("Biaya Layanan: " + pesananResponse.getBiayaLayanan());
+//                            // Lanjutkan untuk atribut lainnya
+//
+//                            OrderAdapter adapter = new OrderAdapter(getActivity(), orderModels);
+//
+//                            listViewOrder.setAdapter(adapter);
+//                        }
+//                    } else {
+//                        System.out.println("Tidak ada data pesanan.");
+//                    }
+//                } else {
+//                    System.out.println("Respons tidak berhasil: " + response.message());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ListPesananResponse> call, Throwable t) {
+//                System.out.println("Gagal melakukan panggilan: " + t.getMessage());
+//            }
+//        });
+
+        Call<ResponseDataHandler> call = apiService.getListPesanan(customerId);
+        call.enqueue(new Callback<ResponseDataHandler>() {
+            @Override
+            public void onResponse(Call<ResponseDataHandler> call, Response<ResponseDataHandler> response) {
+                if (response.isSuccessful()) {
+                    ResponseDataHandler responseHandler = response.body();
+                    JsonElement responseData = responseHandler.getResponseData();
+
+                    if (responseHandler.isStatus()) { // Memeriksa status respons
+                        if (responseData.isJsonArray()) { // Memeriksa apakah data adalah array JSON
+                            JsonArray dataArray = responseData.getAsJsonArray();
+                            Type listType = new TypeToken<List<ListPesananResponseData>>() {}.getType();
+                            List<ListPesananResponseData> pesananList = new Gson().fromJson(dataArray, listType);
+
+                            ArrayList<OrderModel> orderModels = new ArrayList<>();
+                            orderModels.add(new OrderModel("Bandung", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
+                            //        orderModels.add(new OrderModel("Padang", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
+                            //        orderModels.add(new OrderModel("Bali", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
+                            //        orderModels.add(new OrderModel("Bengkulu", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Pengiriman"));
+
+                            if (pesananList != null && pesananList.size() > 0) {
+                                for (ListPesananResponseData pesananResponse : pesananList) {
+                                    orderModels.add(new OrderModel(pesananResponse.getLokasiTujuan(), "1 Jan, 0000", "00:00 am",
+                                            "System", pesananResponse.getStatus()));
+                                    System.out.println("ID Pemesanan: " + pesananResponse.getIdPemesanan());
+                                    System.out.println("Biaya Layanan: " + pesananResponse.getBiayaLayanan());
+                                    // Lanjutkan untuk atribut lainnya
+
+                                    OrderAdapter adapter = new OrderAdapter(getActivity(), orderModels);
+
+                                    listViewOrder.setAdapter(adapter);
+                                }
+                            } else {
+                                System.out.println("Tidak ada data pesanan.");
+                            }
+                        } else {
+                            System.out.println("Data tidak valid.");
+                        }
+                    } else {
+                        System.out.println("Respons tidak berhasil: " + responseHandler.getMessage());
+                    }
+                } else {
+                    System.out.println("Respons tidak berhasil: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDataHandler> call, Throwable t) {
+                System.out.println("Gagal melakukan panggilan: " + t.getMessage());
+            }
+        });
+
+
+
 
         listViewOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

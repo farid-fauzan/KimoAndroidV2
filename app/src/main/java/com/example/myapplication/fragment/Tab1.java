@@ -3,17 +3,12 @@ package com.example.myapplication.fragment;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.pdf.PdfDocument;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +16,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -34,20 +27,19 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.Services.ApiService;
+import com.example.myapplication.Request.PesananRequest;
+import com.example.myapplication.Services.ParameterLoader;
 import com.example.myapplication.adapter.TujuanAdapter;
 import com.example.myapplication.model.CustomerModel;
 import com.example.myapplication.model.PemesananModel;
 import com.example.myapplication.model.TujuanModel;
-import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.CompositeDateValidator;
-import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,8 +47,15 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
 
-public class Tab1 extends Fragment {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
+public class Tab1 extends Fragment {
+    private ApiService apiService;
+    private ParameterLoader parameterLoader;
     CardView cardViewJakarta, cardViewSurabaya,
              cardViewSelfDrive, cardViewCarCarrier, cardViewKapalRoro, cardViewTowing, cardViewContainer, cardViewTanggal, cardViewWaktu;
     RelativeLayout relativeLayoutLokasi, relativeLayoutLayanan, relativeLayoutTujuan,
@@ -82,6 +81,7 @@ public class Tab1 extends Fragment {
     @SuppressLint("MissingInflatedId")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
+        parameterLoader = new ParameterLoader();
         cardViewJakarta = view.findViewById(R.id.card_view_jakarta);
         cardViewSurabaya = view.findViewById(R.id.card_view_surabaya);
 
@@ -235,6 +235,51 @@ public class Tab1 extends Fragment {
                 String kodeBooking = generateKodeBooking(7);
                 textViewKodeBooking.setText(kodeBooking);
 
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(parameterLoader.URL()) // Ganti dengan URL base API Anda
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                apiService = retrofit.create(ApiService.class);
+
+
+
+                PesananRequest request = new PesananRequest();
+                request.setBiayaLayanan("");
+                if (cb_extra_cc.isChecked() || textViewExtraCc.getText().toString().equals("Diatas 2000cc")){
+                    request.setExtraCc(true);
+                }else {
+                    request.setExtraCc(false);
+                }
+                request.setHargaTotal(hargaTotal);
+                request.setLayananPengiriman(layanan);
+                request.setLokasiJemput(location);
+                request.setLokasiTujuan(tujuan);
+                request.setKodeBooking(kodeBooking);
+                request.setStatus(ParameterLoader.STATUS_PESANAN.PROSES);
+
+                Call<Void> call = apiService.savePemesanan(request);
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            // Berhasil menyimpan data
+                            System.out.println("berhasil menyimpan");
+                        } else {
+                            // Tangani jika respons tidak berhasil
+                            System.out.println("gagal menyimpan");
+                            System.out.println("response : "+response);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        // Tangani jika permintaan gagal
+                        System.out.println("Kesalahan "+t);
+                    }
+                });
+
+
                 textViewTanggalPemesananKonfirmasi.setText(tanggalPemesanan);
                 textViewJamPemesananKonfirmasi.setText(jamPemesanan);
                 textViewZonaWaktuKonfirmasi.setText(zonaWaktu);
@@ -251,6 +296,31 @@ public class Tab1 extends Fragment {
             }
         });
     }
+
+//    private void savePemesanan() {
+//        PesananRequest request = new PesananRequest();
+//        request.setBiayaLayanan("string");
+//        request.setExtraCc(true);
+//        request.setHargaTotal();
+//
+//
+//        Call<Void> call = apiService.savePemesanan(request);
+//        call.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                if (response.isSuccessful()) {
+//                    // Berhasil menyimpan data
+//                } else {
+//                    // Tangani jika respons tidak berhasil
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                // Tangani jika permintaan gagal
+//            }
+//        });
+//    }
 
     private void costumer() {
         btnBackCostumer.setOnClickListener(new View.OnClickListener() {

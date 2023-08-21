@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.myapplication'
-    compileSdk 33
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.myapplication"
         minSdk 24
-        targetSdk 33
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -26,6 +26,12 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '30.0.3'
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES' // Mengecualikan file dengan path 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'      // Mengecualikan file dengan path 'META-INF/LICENSE'
     }
 }
 
@@ -55,7 +61,7 @@ dependencies {
 //    implementation 'com.google.code.gson:gson:2.8.6'
 
 //    //picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+//    implementation 'com.squareup.picasso:picasso:2.71828'
 //
 //    //FAN
 //
@@ -89,7 +95,13 @@ dependencies {
 
     //google-drive
     implementation 'com.google.api-client:google-api-client-android:1.31.5'
-    implementation 'com.google.apis:google-api-services-drive:v3-rev305-1.25.0'
+//    implementation 'com.google.apis:google-api-services-drive:v3-rev305-1.25.0'
 
+    //FAN
+//    implementation 'com.amitshekhar.android:android-networking:1.0.0'
+
+    //api service
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 }
