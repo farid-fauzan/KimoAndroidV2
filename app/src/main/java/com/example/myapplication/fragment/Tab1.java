@@ -29,7 +29,7 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.R;
 import com.example.myapplication.Services.ApiService;
 import com.example.myapplication.Request.PesananRequest;
-import com.example.myapplication.Services.ParameterLoader;
+import com.example.myapplication.util.ParameterLoader;
 import com.example.myapplication.adapter.TujuanAdapter;
 import com.example.myapplication.model.CustomerModel;
 import com.example.myapplication.model.PemesananModel;

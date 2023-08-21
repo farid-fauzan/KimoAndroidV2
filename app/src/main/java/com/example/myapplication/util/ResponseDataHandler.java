@@ -1,10 +1,9 @@
-package com.example.myapplication.Response;
+package com.example.myapplication.util;
 
+import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-public class ListPesananResponse {
+public class ResponseDataHandler {
     @SerializedName("message")
     private String message;
 
@@ -12,9 +11,7 @@ public class ListPesananResponse {
     private boolean status;
 
     @SerializedName("data")
-    private List<ListPesananResponseData> pesananList;
-
-    // Getter methods
+    private JsonElement responseData; // Menggunakan JsonElement
 
     public String getMessage() {
         return message;
@@ -24,7 +21,7 @@ public class ListPesananResponse {
         return status;
     }
 
-    public List<ListPesananResponseData> getPesananList() {
-        return pesananList;
+    public JsonElement getResponseData() {
+        return responseData;
     }
 }

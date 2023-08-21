@@ -16,11 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.Response.ListPesananResponse;
 import com.example.myapplication.Response.ListPesananResponseData;
-import com.example.myapplication.Response.ResponseDataHandler;
+import com.example.myapplication.util.ResponseDataHandler;
 import com.example.myapplication.Services.ApiService;
-import com.example.myapplication.Services.ParameterLoader;
+import com.example.myapplication.util.ParameterLoader;
 import com.example.myapplication.adapter.OrderAdapter;
 import com.example.myapplication.model.OrderModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -40,7 +39,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;

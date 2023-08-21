@@ -1,4 +1,4 @@
-package com.example.myapplication.Services;
+package com.example.myapplication.util;
 
 public class ParameterLoader {
     public String URL(){
