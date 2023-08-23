@@ -34,6 +34,9 @@ import com.example.myapplication.adapter.TujuanAdapter;
 import com.example.myapplication.model.CustomerModel;
 import com.example.myapplication.model.PemesananModel;
 import com.example.myapplication.model.TujuanModel;
+import com.example.myapplication.util.ResponseDataHandler;
+import com.example.myapplication.util.TokenManager;
+import com.example.myapplication.util.UserManager;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -242,8 +245,6 @@ public class Tab1 extends Fragment {
 
                 apiService = retrofit.create(ApiService.class);
 
-
-
                 PesananRequest request = new PesananRequest();
                 request.setBiayaLayanan("");
                 if (cb_extra_cc.isChecked() || textViewExtraCc.getText().toString().equals("Diatas 2000cc")){
@@ -257,8 +258,11 @@ public class Tab1 extends Fragment {
                 request.setLokasiTujuan(tujuan);
                 request.setKodeBooking(kodeBooking);
                 request.setStatus(ParameterLoader.STATUS_PESANAN.PROSES);
+                request.setIdCustomer(UserManager.getInstance().getIdUser());
 
-                Call<Void> call = apiService.savePemesanan(request);
+                String authorizationHeader = TokenManager.getInstance().getToken();
+
+                Call<Void> call = apiService.savePemesanan(authorizationHeader,request);
                 call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

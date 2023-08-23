@@ -22,6 +22,7 @@ import com.example.myapplication.Services.ApiService;
 import com.example.myapplication.util.ParameterLoader;
 import com.example.myapplication.adapter.OrderAdapter;
 import com.example.myapplication.model.OrderModel;
+import com.example.myapplication.util.TokenManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -123,48 +124,10 @@ public class Tab2 extends Fragment implements OnMapReadyCallback{
 
         ApiService apiService = retrofit.create(ApiService.class);
 
-        Long customerId = 0L; // Ganti dengan ID customer yang sesuai
-//        Call<ListPesananResponse> call = apiService.getListPesanan(customerId);
-//        call.enqueue(new Callback<ListPesananResponse>() {
-//            @Override
-//            public void onResponse(Call<ListPesananResponse> call, Response<ListPesananResponse> response) {
-//                if (response.isSuccessful()) {
-//                    ListPesananResponse listPesananResponse = response.body();
-//                    List<ListPesananResponseData> pesananList = listPesananResponse.getPesananList();
-//
-//                    ArrayList<OrderModel> orderModels = new ArrayList<>();
-//                    orderModels.add(new OrderModel("Bandung", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
-//                    //        orderModels.add(new OrderModel("Padang", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
-//                    //        orderModels.add(new OrderModel("Bali", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Payment Pending"));
-//                    //        orderModels.add(new OrderModel("Bengkulu", "2 Mey, 2023", "10:00 am", "Faisal Kimo", "Pengiriman"));
-//
-//                    if (pesananList != null && pesananList.size() > 0) {
-//                        for (ListPesananResponseData pesananResponse : pesananList) {
-//                            orderModels.add(new OrderModel(pesananResponse.getLokasiTujuan(), "1 Jan, 0000", "00:00 am",
-//                                    "System", pesananResponse.getStatus()));
-//                            System.out.println("ID Pemesanan: " + pesananResponse.getIdPemesanan());
-//                            System.out.println("Biaya Layanan: " + pesananResponse.getBiayaLayanan());
-//                            // Lanjutkan untuk atribut lainnya
-//
-//                            OrderAdapter adapter = new OrderAdapter(getActivity(), orderModels);
-//
-//                            listViewOrder.setAdapter(adapter);
-//                        }
-//                    } else {
-//                        System.out.println("Tidak ada data pesanan.");
-//                    }
-//                } else {
-//                    System.out.println("Respons tidak berhasil: " + response.message());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ListPesananResponse> call, Throwable t) {
-//                System.out.println("Gagal melakukan panggilan: " + t.getMessage());
-//            }
-//        });
+        String authorizationHeader = TokenManager.getInstance().getToken();
 
-        Call<ResponseDataHandler> call = apiService.getListPesanan(customerId);
+        Long customerId = 0L; // Ganti dengan ID customer yang sesuai
+        Call<ResponseDataHandler> call = apiService.getListPesanan(authorizationHeader, customerId);
         call.enqueue(new Callback<ResponseDataHandler>() {
             @Override
             public void onResponse(Call<ResponseDataHandler> call, Response<ResponseDataHandler> response) {

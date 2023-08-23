@@ -31,13 +31,13 @@
             android:background="@drawable/blue_border_rounded_cornwe">
             <!-- INPUT -->
             <EditText
-                android:id="@+id/username_input"
+                android:id="@+id/email_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/username_icon"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Username"
+                android:hint="Email"
                 android:textColorHint="#A6A6A6"
                 android:textColor="@color/black"
                 android:inputType="textEmailAddress"

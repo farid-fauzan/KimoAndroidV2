@@ -15,10 +15,10 @@ public class PesananRequest {
     private String hargaTotal;
 
     @SerializedName("idCustomer")
-    private int idCustomer;
+    private Long idCustomer;
 
     @SerializedName("idDriver")
-    private int idDriver;
+    private Long idDriver;
 
     @SerializedName("layananPengiriman")
     private String layananPengiriman;
@@ -62,19 +62,19 @@ public class PesananRequest {
         this.hargaTotal = hargaTotal;
     }
 
-    public int getIdCustomer() {
+    public Long getIdCustomer() {
         return idCustomer;
     }
 
-    public void setIdCustomer(int idCustomer) {
+    public void setIdCustomer(Long idCustomer) {
         this.idCustomer = idCustomer;
     }
 
-    public int getIdDriver() {
+    public Long getIdDriver() {
         return idDriver;
     }
 
-    public void setIdDriver(int idDriver) {
+    public void setIdDriver(Long idDriver) {
         this.idDriver = idDriver;
     }
 
