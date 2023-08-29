@@ -31,7 +31,7 @@ public class TujuanAdapter extends ArrayAdapter<TujuanModel> {
         TextView textViewHarga = convertView.findViewById(R.id.text_harga);
 
         textViewLokasi.setText(tujuanModel.getLokasi());
-        textViewHarga.setText(tujuanModel.getHarga());
+        textViewHarga.setText(tujuanModel.getHarga().toString());
 
         return convertView;
     }

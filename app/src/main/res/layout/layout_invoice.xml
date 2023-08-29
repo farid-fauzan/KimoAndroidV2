@@ -59,7 +59,7 @@
 
             <include
                 layout="@layout/item_detail_pesanan"
-                android:id="@+id/include_konfirmasi"
+                android:id="@+id/include_invoice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -27,8 +28,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.Response.ListBiayaResponse;
 import com.example.myapplication.Services.ApiService;
 import com.example.myapplication.Request.PesananRequest;
+import com.example.myapplication.util.BiayaPengirimanManager;
 import com.example.myapplication.util.ParameterLoader;
 import com.example.myapplication.adapter.TujuanAdapter;
 import com.example.myapplication.model.CustomerModel;
@@ -39,13 +42,19 @@ import com.example.myapplication.util.TokenManager;
 import com.example.myapplication.util.UserManager;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
@@ -301,31 +310,6 @@ public class Tab1 extends Fragment {
         });
     }
 
-//    private void savePemesanan() {
-//        PesananRequest request = new PesananRequest();
-//        request.setBiayaLayanan("string");
-//        request.setExtraCc(true);
-//        request.setHargaTotal();
-//
-//
-//        Call<Void> call = apiService.savePemesanan(request);
-//        call.enqueue(new Callback<Void>() {
-//            @Override
-//            public void onResponse(Call<Void> call, Response<Void> response) {
-//                if (response.isSuccessful()) {
-//                    // Berhasil menyimpan data
-//                } else {
-//                    // Tangani jika respons tidak berhasil
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//                // Tangani jika permintaan gagal
-//            }
-//        });
-//    }
-
     private void costumer() {
         btnBackCostumer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -530,37 +514,108 @@ public class Tab1 extends Fragment {
     private void tujuan() {
 
         ArrayList<TujuanModel> tujuanModels = new ArrayList<>();
-        tujuanModels.add(new TujuanModel("Bandung", "Rp2,200,000,-"));
-        tujuanModels.add(new TujuanModel("Banten", "Rp2,200,000,-"));
-        tujuanModels.add(new TujuanModel("Bengkulu", "Rp3,600,000,-"));
-        tujuanModels.add(new TujuanModel("Jambi", "Rp4,100,000,-"));
-        tujuanModels.add(new TujuanModel("Lampung", "Rp2,600,000,-"));
-        tujuanModels.add(new TujuanModel("Manado", "Rp2,600,000,-"));
-        tujuanModels.add(new TujuanModel("Medan", "Rp2,600,000,-"));
-        tujuanModels.add(new TujuanModel("Padang", "Rp5,200,000,-"));
-        tujuanModels.add(new TujuanModel("Serang", "Rp2,400,000,-"));
-        tujuanModels.add(new TujuanModel("Semarang", "Rp2,400,000,-"));
-        tujuanModels.add(new TujuanModel("Yogyakarta", "Rp3,000,000,-"));
+        tujuanModels.clear();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(parameterLoader.URL())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        TujuanAdapter adapter = new TujuanAdapter(getActivity(), tujuanModels);
+        ApiService apiService = retrofit.create(ApiService.class);
 
-        listViewTujuan.setAdapter(adapter);
+        String authorizationHeader = TokenManager.getInstance().getToken();
+
+        Call<ResponseDataHandler> call = apiService.getListBiaya(authorizationHeader,
+                BiayaPengirimanManager.getInstance().getKotaAsal(),
+                BiayaPengirimanManager.getInstance().getLayanan());
+        call.enqueue(new Callback<ResponseDataHandler>() {
+            @Override
+            public void onResponse(Call<ResponseDataHandler> call, Response<ResponseDataHandler> response) {
+                if (response.isSuccessful()) {
+                    ResponseDataHandler responseHandler = response.body();
+                    JsonElement responseData = responseHandler.getResponseData();
+                    System.out.println("jsondata : "+responseData.toString());
+
+                    if (responseHandler.isStatus()) { // Memeriksa status respons
+                        if (responseData.isJsonArray()) { // Memeriksa apakah data adalah array JSON
+                            JsonArray dataArray = responseData.getAsJsonArray();
+                            Type listType = new TypeToken<List<ListBiayaResponse>>() {}.getType();
+                            List<ListBiayaResponse> biayaResponseList = new Gson().fromJson(dataArray, listType);
+
+
+
+//                            tujuanModels.add(new TujuanModel("Bandung", "Rp2,200,000,-"));
+//                            tujuanModels.add(new TujuanModel("Banten", "Rp2,200,000,-"));
+//                            tujuanModels.add(new TujuanModel("Bengkulu", "Rp3,600,000,-"));
+//                            tujuanModels.add(new TujuanModel("Jambi", "Rp4,100,000,-"));
+//                            tujuanModels.add(new TujuanModel("Lampung", "Rp2,600,000,-"));
+//                            tujuanModels.add(new TujuanModel("Manado", "Rp2,600,000,-"));
+//                            tujuanModels.add(new TujuanModel("Medan", "Rp2,600,000,-"));
+//                            tujuanModels.add(new TujuanModel("Padang", "Rp5,200,000,-"));
+//                            tujuanModels.add(new TujuanModel("Serang", "Rp2,400,000,-"));
+//                            tujuanModels.add(new TujuanModel("Semarang", "Rp2,400,000,-"));
+//                            tujuanModels.add(new TujuanModel("Yogyakarta", "Rp3,000,000,-"));
+
+                            if (biayaResponseList != null &&  biayaResponseList.size() > 0) {
+                                for (ListBiayaResponse biayaResponse : biayaResponseList) {
+                                    tujuanModels.add(new TujuanModel(biayaResponse.getKotaTujuan(), biayaResponse.getHarga()));
+                                    TujuanAdapter adapter = new TujuanAdapter(getActivity(), tujuanModels);
+
+                                    listViewTujuan.setAdapter(adapter);
+
+
+                                }
+                            } else {
+                                System.out.println("Tidak ada data biaya.");
+                            }
+//                            listViewTujuan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                                @Override
+//                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                                    textViewTujuan.setText(String.valueOf(tujuanModels.get(position).getLokasi()));
+//                                    textViewHargaTotal.setText(String.valueOf(tujuanModels.get(position).getHarga()));
+//
+//                                    relativeLayoutTujuan.setVisibility(View.GONE);
+//                                    relativeLayoutTanggal.setVisibility(View.VISIBLE);
+//                                }
+//                            });
+
+                        } else {
+                            tujuanModels.add(new TujuanModel("Layanan Tidak Tersedia", 0.0));
+                            TujuanAdapter adapter = new TujuanAdapter(getActivity(), tujuanModels);
+
+                            listViewTujuan.setAdapter(adapter);
+                            System.out.println("Data tidak valid.");
+                        }
+                    } else {
+                        System.out.println("Respons tidak berhasil: " + responseHandler.getMessage());
+                    }
+                } else {
+                    System.out.println("Respons tidak berhasil: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDataHandler> call, Throwable t) {
+                System.out.println("Gagal melakukan panggilan: " + t.getMessage());
+            }
+        });
 
         listViewTujuan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getContext(), "Selected Item: " + parent.getItemAtPosition(position) +" : "+ tujuanModels.get(position).getLokasi(), Toast.LENGTH_SHORT).show();
-//                pemesananModel.setTujuan(String.valueOf(tujuanModels.get(position).getLokasi()));
-//                pemesananModel.setHarga(String.valueOf(tujuanModels.get(position).getHarga()));
-//                System.out.println(pemesananModel.getTujuan() +" : "+pemesananModel.getHarga());
-
                 textViewTujuan.setText(String.valueOf(tujuanModels.get(position).getLokasi()));
                 textViewHargaTotal.setText(String.valueOf(tujuanModels.get(position).getHarga()));
 
-                relativeLayoutTujuan.setVisibility(View.GONE);
-                relativeLayoutTanggal.setVisibility(View.VISIBLE);
+                if (tujuanModels.get(position).getLokasi().equals("Layanan Tidak Tersedia")){
+                    Toast.makeText(getContext(), "Silahkan Pilih Layanan Lain!", Toast.LENGTH_SHORT).show();
+                }else {
+                    relativeLayoutTujuan.setVisibility(View.GONE);
+                    relativeLayoutTanggal.setVisibility(View.VISIBLE);
+                }
+
             }
         });
+
+
 
         btnBackTujuan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -580,7 +635,8 @@ public class Tab1 extends Fragment {
 //                pemesananModel.setLayanan("Self Drive");
 //                System.out.println(pemesananModel.getLayanan());
                 textViewLayananPengiriman.setText("Self Drive");
-
+                BiayaPengirimanManager.getInstance().setLayanan("Self Drive");
+                tujuan();
                 relativeLayoutLayanan.setVisibility(View.GONE);
                 relativeLayoutTujuan.setVisibility(View.VISIBLE);
             }
@@ -592,6 +648,8 @@ public class Tab1 extends Fragment {
 //                pemesananModel.setLayanan("Car Carrier");
 //                System.out.println(pemesananModel.getLayanan());
                 textViewLayananPengiriman.setText("Car Carrier");
+                BiayaPengirimanManager.getInstance().setLayanan("Car Carrier");
+                tujuan();
 
                 relativeLayoutLayanan.setVisibility(View.GONE);
                 relativeLayoutTujuan.setVisibility(View.VISIBLE);
@@ -604,7 +662,8 @@ public class Tab1 extends Fragment {
 //                pemesananModel.setLayanan("Kapal Roro");
 //                System.out.println(pemesananModel.getLayanan());
                 textViewLayananPengiriman.setText("Kapal Roro");
-
+                BiayaPengirimanManager.getInstance().setLayanan("Kapal Roro");
+                tujuan();
                 relativeLayoutLayanan.setVisibility(View.GONE);
                 relativeLayoutTujuan.setVisibility(View.VISIBLE);
             }
@@ -616,7 +675,8 @@ public class Tab1 extends Fragment {
 //                pemesananModel.setLayanan("Towing");
 //                System.out.println(pemesananModel.getLayanan());
                 textViewLayananPengiriman.setText("Towing");
-
+                BiayaPengirimanManager.getInstance().setLayanan("Towing");
+                tujuan();
                 relativeLayoutLayanan.setVisibility(View.GONE);
                 relativeLayoutTujuan.setVisibility(View.VISIBLE);
             }
@@ -628,6 +688,8 @@ public class Tab1 extends Fragment {
 //                pemesananModel.setLayanan("Container");
 //                System.out.println(pemesananModel.getLayanan());
                 textViewLayananPengiriman.setText("Container");
+                BiayaPengirimanManager.getInstance().setLayanan("Container");
+                tujuan();
                 relativeLayoutLayanan.setVisibility(View.GONE);
                 relativeLayoutTujuan.setVisibility(View.VISIBLE);
             }
@@ -646,7 +708,9 @@ public class Tab1 extends Fragment {
         cardViewJakarta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textViewLocation.setText("DKI Jakarta");
+//                textViewLocation.setText("Jakarta");
+//                lokasiAsal = "Jakarta";
+                BiayaPengirimanManager.getInstance().setKotaAsal("Jakarta");
 
                 relativeLayoutLokasi.setVisibility(View.GONE);
                 relativeLayoutLayanan.setVisibility(View.VISIBLE);
@@ -656,7 +720,10 @@ public class Tab1 extends Fragment {
         cardViewSurabaya.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textViewLocation.setText("Surabaya");
+//                textViewLocation.setText("Surabaya");
+//                lokasiAsal = "Surabaya";
+                BiayaPengirimanManager.getInstance().setKotaAsal("Surabaya");
+
                 relativeLayoutLokasi.setVisibility(View.GONE);
                 relativeLayoutLayanan.setVisibility(View.VISIBLE);
 

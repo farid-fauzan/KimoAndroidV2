@@ -7,12 +7,15 @@ public class OrderModel {
     private String agent;
     private String status;
 
-    public OrderModel(String tujuan, String tanggal, String jam, String agent, String status) {
+    private Long idPesanan;
+
+    public OrderModel(String tujuan, String tanggal, String jam, String agent, String status, Long idPesanan) {
         this.tujuan = tujuan;
         this.tanggal = tanggal;
         this.jam = jam;
         this.agent = agent;
         this.status = status;
+        this.idPesanan = idPesanan;
     }
 
     public String getTujuan() {
@@ -53,5 +56,13 @@ public class OrderModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getIdPesanan() {
+        return idPesanan;
+    }
+
+    public void setIdPesanan(Long idPesanan) {
+        this.idPesanan = idPesanan;
     }
 }

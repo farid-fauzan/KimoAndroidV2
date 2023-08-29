@@ -24,4 +24,10 @@ public interface ApiService {
     @GET("/pemesanan/list-pesanan-customer")
     Call<ResponseDataHandler> getListPesanan(@Header("Authorization") String authorization, @Query("idCustomer") Long idCustomer);
 
+    @GET("/biaya/list-tujuan")
+    Call<ResponseDataHandler> getListBiaya(@Header("Authorization") String authorization, @Query("kotaAsal") String kotaAsal, @Query("layanan") String layanan);
+
+    @GET("/pemesanan/detail-pesanan-customer")
+    Call<ResponseDataHandler> getDetailPesanan(@Header("Authorization") String authorization, @Query("idCustomer") Long idCustomer, @Query("idPemesanan") Long idPemesanan);
+
 }

@@ -2,9 +2,9 @@ package com.example.myapplication.model;
 
 public class TujuanModel {
     private String lokasi;
-    private String harga;
+    private Double harga;
 
-    public TujuanModel(String lokasi, String harga) {
+    public TujuanModel(String lokasi, Double harga) {
         this.lokasi = lokasi;
         this.harga = harga;
     }
@@ -17,11 +17,11 @@ public class TujuanModel {
         this.lokasi = lokasi;
     }
 
-    public String getHarga() {
+    public Double getHarga() {
         return harga;
     }
 
-    public void setHarga(String harga) {
+    public void setHarga(Double harga) {
         this.harga = harga;
     }
 }
