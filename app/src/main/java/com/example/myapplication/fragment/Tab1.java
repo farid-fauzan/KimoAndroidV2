@@ -367,6 +367,9 @@ public class Tab1 extends Fragment {
                     userUpdateRequest.setPhone(editTextTeleponCustomer.getText().toString());
                     userUpdateRequest.setUserId(UserManager.getInstance().getIdUser());
 
+                    UserManager.getInstance().setPhone(editTextTeleponCustomer.getText().toString());
+                    UserManager.getInstance().setName(editTextNamaCustomer.getText().toString());
+
                     Call<Void> call = apiService.updateUser(userUpdateRequest);
                     call.enqueue(new Callback<Void>() {
                         @Override

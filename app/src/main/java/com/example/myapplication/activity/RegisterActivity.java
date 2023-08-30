@@ -18,32 +18,45 @@ import androidx.appcompat.app.AppCompatActivity;
 //import com.androidnetworking.interfaces.JSONObjectRequestListener;
 //import com.example.project_ratih_java.R;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.Request.LoginRequest;
+import com.example.myapplication.Request.RegisterRequest;
+import com.example.myapplication.Services.ApiService;
+import com.example.myapplication.util.ParameterLoader;
+import com.example.myapplication.util.ResponseDataHandler;
+import com.example.myapplication.util.TokenManager;
+import com.example.myapplication.util.UserManager;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
 import java.util.UUID;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class RegisterActivity extends AppCompatActivity {
 //
-    EditText et_username,et_password, et_confpassword;
+    ParameterLoader parameterLoader;
+    EditText et_email,et_password, et_confpassword;
     Button btn_reg, btn_back;
-//    String username,confirmpassword,password,id_user,md5passwordKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-//
-//        et_username = findViewById(R.id.username_input);
-//        et_confpassword  = findViewById(R.id.repassword_input);
-//        et_password = findViewById(R.id.password_input);
+        parameterLoader = new ParameterLoader();
+
+        et_email = findViewById(R.id.email_input);
+        et_confpassword  = findViewById(R.id.repassword_input);
+        et_password = findViewById(R.id.password_input);
         btn_back = findViewById(R.id.btn_back);
         btn_reg = findViewById(R.id.btn_reg);
-//        id_user = UUID.randomUUID().toString();
-//
-//
-//
-//
+
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,60 +65,144 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
-//
-//
-//        btn_reg = findViewById(R.id.btn_reg);
-//        btn_reg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                username = et_username.getText().toString();
-//                confirmpassword = et_confpassword.getText().toString();
-//                password =  et_password.getText().toString();
-//                md5passwordKey = md5Java(password);
-//
-//                if (password.equals(confirmpassword)){
-//                    if (username.equals("") || password.equals("") || confirmpassword.equals("")){
-//                        Toast.makeText(getApplicationContext(),"Data Kosong",Toast.LENGTH_LONG).show();
-//                    }else {
-//                        AndroidNetworking.post(api_register)
-//
-//                                .addBodyParameter("id_user", id_user )
-//                                .addBodyParameter("username", username)
-//                                .addBodyParameter("password", md5passwordKey)
-//                                .addBodyParameter("status","user")
-//                                .addBodyParameter("nama_user", "Add_Name")
-//                                .addBodyParameter("nohp_user", "Add_Phone")
-//                                .addBodyParameter("alamat_user", "Add_Address")
-//                                .addBodyParameter("foto", "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")
-//                                .addBodyParameter("email", "Add_Email")
-//                                .setTag("test")
-//                                .setPriority(Priority.MEDIUM)
-//                                .build()
-//                                .getAsJSONObject(new JSONObjectRequestListener() {
-//                                    @Override
-//                                    public void onResponse(JSONObject response) {
-//                                        Toast.makeText(getApplicationContext(),"Register Berhasil" +response,Toast.LENGTH_LONG).show();
-//                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                                        RegisterActivity.this.startActivity(intent);
-//                                        finish();
-//                                    }
-//
-//                                    @Override
-//                                    public void onError(ANError anError) {
-//                                        Toast.makeText(getApplicationContext(),"Register Gagal" + anError,Toast.LENGTH_LONG).show();
-//
-//                                    }
-//                                });
-//
-//                    }
-//                }
-//                else {
-//                    Toast.makeText(getApplicationContext(),"Password Salah" ,Toast.LENGTH_LONG).show();
-//                }
-//
-//
-//            }
-//        });
+
+        btn_reg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String password, confirmpassword, email;
+
+                email = et_email.getText().toString();
+                confirmpassword = et_confpassword.getText().toString();
+                password =  et_password.getText().toString();
+
+                if (password.equals(confirmpassword)){
+                    if (email.equals("") || password.equals("") || confirmpassword.equals("")){
+                        Toast.makeText(getApplicationContext(),"Data Tidak Boleh Kosong",Toast.LENGTH_LONG).show();
+                    }else {
+
+                        RegisterRequest registerRequest = new RegisterRequest();
+                        registerRequest.setRole("1");
+                        registerRequest.setEmail(et_email.getText().toString());
+                        registerRequest.setPassword(et_password.getText().toString());
+                        registerRequest.setPasswordConfirm(et_confpassword.getText().toString());
+
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(parameterLoader.URL())
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
+
+                        ApiService apiService = retrofit.create(ApiService.class);
+
+                        Call<Void> call = apiService.register(registerRequest);
+                        call.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                System.out.println("response reg : "+response);
+                                if (response.isSuccessful()) {
+                                    // Berhasil menyimpan data
+                                    Toast.makeText(getApplicationContext(), "Register Berhasil", Toast.LENGTH_SHORT).show();
+
+                                    LoginRequest request = new LoginRequest();
+                                    request.setEmail(et_email.getText().toString());
+                                    request.setPassword(et_password.getText().toString());
+
+                                    Retrofit retrofit = new Retrofit.Builder()
+                                            .baseUrl(parameterLoader.URL())
+                                            .addConverterFactory(GsonConverterFactory.create())
+                                            .build();
+
+                                    ApiService apiService = retrofit.create(ApiService.class);
+
+                                    Call<ResponseDataHandler> callResponse = apiService.getUserLogin(request);
+                                    callResponse.enqueue(new Callback<ResponseDataHandler>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseDataHandler> callResponse, Response<ResponseDataHandler> response) {
+                                            if (response.isSuccessful()) {
+                                                ResponseDataHandler responseHandler = response.body();
+                                                JsonElement responseData = responseHandler.getResponseData();
+
+                                                if (responseHandler.isStatus()) { // Memeriksa status respons
+                                                    String token = responseHandler.getResponseData().getAsString(); // Ambil token dari objek JSON
+
+                                                    // Set token
+                                                    TokenManager.getInstance().setToken("Bearer " + token);
+
+                                                    Retrofit retrofit = new Retrofit.Builder()
+                                                            .baseUrl(parameterLoader.URL())
+                                                            .addConverterFactory(GsonConverterFactory.create())
+                                                            .build();
+
+                                                    ApiService apiService = retrofit.create(ApiService.class);
+
+                                                    Call<ResponseDataHandler> call = apiService.getDataUser(token);
+                                                    call.enqueue(new Callback<ResponseDataHandler>() {
+                                                        @Override
+                                                        public void onResponse(Call<ResponseDataHandler> call, Response<ResponseDataHandler> response) {
+                                                            if (response.isSuccessful()) {
+                                                                ResponseDataHandler responseHandler = response.body();
+                                                                JsonElement responseData = responseHandler.getResponseData();
+
+                                                                if (responseHandler.isStatus()) { // Memeriksa status respons
+                                                                    JsonObject dataObject = responseData.getAsJsonObject();
+                                                                    // Set User
+                                                                    System.out.println("object : "+dataObject);
+                                                                    UserManager.getInstance().setIdUser(Long.valueOf(dataObject.get("idUser").getAsLong()));
+                                                                    System.out.println("emaaaail : "+dataObject.get("email").getAsString());
+                                                                    UserManager.getInstance().setEmail(String.valueOf(dataObject.get("email").getAsString()));
+//                                                                    UserManager.getInstance().setPhone(String.valueOf(dataObject.get("phone").getAsString()));
+//                                                                    UserManager.getInstance().setName(String.valueOf(dataObject.get("name").getAsString()));
+
+                                                                }
+                                                            }
+                                                        }
+                                                        @Override
+                                                        public void onFailure(Call<ResponseDataHandler> call, Throwable t) {
+                                                            Toast.makeText(getApplicationContext(), "Koneksi Error!", Toast.LENGTH_SHORT).show();
+
+                                                        }
+                                                    });
+
+
+                                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                                    RegisterActivity.this.startActivity(intent);
+                                                    finish();
+
+                                                }
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), "Email atau password salah", Toast.LENGTH_SHORT).show();
+                                                System.out.println("Email / Password Salah!" + response.message());
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseDataHandler> call, Throwable t) {
+                                            System.out.println("Gagal melakukan panggilan: " + t.getMessage());
+                                            Toast.makeText(getApplicationContext(), "Koneksi Error!", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+
+                                } else {
+                                    // Tangani jika respons tidak berhasil
+                                    Toast.makeText(getApplicationContext(), "Register Tidak Berhasil", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                // Tangani jika permintaan gagal
+                                System.out.println("Kesalahan "+t);
+                            }
+                        });
+                    }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Password Tidak Sesuai" ,Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
     }
 }

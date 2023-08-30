@@ -2,7 +2,7 @@ package com.example.myapplication.util;
 
 public class ParameterLoader {
     public String URL(){
-        return "http://10.236.250.44:8190";
+        return "http://10.236.250.44:8191";
     }
 
     public interface STATUS_PESANAN{

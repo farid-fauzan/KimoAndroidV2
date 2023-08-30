@@ -2,6 +2,7 @@ package com.example.myapplication.Services;
 
 import com.example.myapplication.Request.LoginRequest;
 import com.example.myapplication.Request.PesananRequest;
+import com.example.myapplication.Request.RegisterRequest;
 import com.example.myapplication.Request.UserUpdateRequest;
 import com.example.myapplication.util.ResponseDataHandler;
 
@@ -18,6 +19,9 @@ public interface ApiService {
 
     @POST("/user/login")
     Call<ResponseDataHandler> getUserLogin(@Body LoginRequest body);
+
+    @POST("/user/register") // Ganti dengan endpoint API Anda
+    Call<Void> register(@Body RegisterRequest body);
 
     @POST("/pemesanan/add-pesanan") // Ganti dengan endpoint API Anda
     Call<Void> savePemesanan(@Header("Authorization") String authorization, @Body PesananRequest body);
