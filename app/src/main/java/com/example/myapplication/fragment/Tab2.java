@@ -248,9 +248,9 @@ public class Tab2 extends Fragment implements OnMapReadyCallback{
                                                         textViewExtraCcInvoice.setText("2000cc");
                                                     }
                                                     textViewLayananPengirimanInvoice.setText(dataObject.getAsJsonPrimitive("layananPengiriman").getAsString());
-                                                    textViewNamaCustomerInvoice.setText("SYSTEM");
-                                                    textViewTeleponCustomerInvoice.setText("SYSTEM");
-                                                    textViewEmailCustomerInvoice.setText("SYSTEM");
+                                                    textViewNamaCustomerInvoice.setText(UserManager.getInstance().getName());
+                                                    textViewTeleponCustomerInvoice.setText(UserManager.getInstance().getPhone());
+                                                    textViewEmailCustomerInvoice.setText(UserManager.getInstance().getEmail());
                                                     textViewHargaTotalInvoice.setText(dataObject.getAsJsonPrimitive("hargaTotal").getAsString());
 
                                                     String status = dataObject.getAsJsonPrimitive("status").getAsString();

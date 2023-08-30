@@ -2,6 +2,7 @@ package com.example.myapplication.Services;
 
 import com.example.myapplication.Request.LoginRequest;
 import com.example.myapplication.Request.PesananRequest;
+import com.example.myapplication.Request.UserUpdateRequest;
 import com.example.myapplication.util.ResponseDataHandler;
 
 import retrofit2.Call;
@@ -29,5 +30,8 @@ public interface ApiService {
 
     @GET("/pemesanan/detail-pesanan-customer")
     Call<ResponseDataHandler> getDetailPesanan(@Header("Authorization") String authorization, @Query("idCustomer") Long idCustomer, @Query("idPemesanan") Long idPemesanan);
+
+    @POST("/user/update-user")
+    Call<Void> updateUser(@Body UserUpdateRequest body);
 
 }

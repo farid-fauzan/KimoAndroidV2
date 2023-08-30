@@ -28,6 +28,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.Request.UserUpdateRequest;
 import com.example.myapplication.Response.ListBiayaResponse;
 import com.example.myapplication.Services.ApiService;
 import com.example.myapplication.Request.PesananRequest;
@@ -90,7 +91,7 @@ public class Tab1 extends Fragment {
     CustomerModel customerModel = new CustomerModel();
 
 
-    @SuppressLint("MissingInflatedId")
+//    @SuppressLint("MissingInflatedId")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
         parameterLoader = new ParameterLoader();
@@ -168,6 +169,8 @@ public class Tab1 extends Fragment {
         editTextEmail = view.findViewById(R.id.input_text_customer_email);
         editTextPesan = view.findViewById(R.id.input_text_customer_message);
 
+        editTextPesan.setVisibility(View.GONE);
+
         //layout sesuai urutan
         relativeLayoutLokasi.setVisibility(View.VISIBLE);
         relativeLayoutLayanan.setVisibility(View.GONE);
@@ -185,7 +188,7 @@ public class Tab1 extends Fragment {
         tujuan();
         tanggal();
         cc();
-        costumer();
+        customer();
         pesanan();
         konfirmasi();
 
@@ -310,7 +313,9 @@ public class Tab1 extends Fragment {
         });
     }
 
-    private void costumer() {
+    private void customer() {
+        editTextEmail.setEnabled(false);
+
         btnBackCostumer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -350,9 +355,43 @@ public class Tab1 extends Fragment {
 //                    customerModel.setTelepon(editTextTeleponCustomer.getText().toString());
 //                    customerModel.setEmail(editTextEmail.getText().toString());
 
-                    textViewNamaCustomer.setText(editTextNamaCustomer.getText().toString());
-                    textViewTeleponCustomer.setText(editTextTeleponCustomer.getText().toString());
-                    textViewEmailCustomer.setText(editTextEmail.getText().toString());
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(parameterLoader.URL()) // Ganti dengan URL base API Anda
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+
+                    apiService = retrofit.create(ApiService.class);
+
+                    UserUpdateRequest userUpdateRequest = new UserUpdateRequest();
+                    userUpdateRequest.setName(editTextNamaCustomer.getText().toString());
+                    userUpdateRequest.setPhone(editTextTeleponCustomer.getText().toString());
+                    userUpdateRequest.setUserId(UserManager.getInstance().getIdUser());
+
+                    Call<Void> call = apiService.updateUser(userUpdateRequest);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                // Berhasil menyimpan data
+                                System.out.println("berhasil update");
+                                textViewNamaCustomer.setText(editTextNamaCustomer.getText().toString());
+                                textViewTeleponCustomer.setText(editTextTeleponCustomer.getText().toString());
+                                textViewEmailCustomer.setText(editTextEmail.getText().toString());
+                            } else {
+                                // Tangani jika respons tidak berhasil
+                                System.out.println("gagal menyimpan");
+                                System.out.println("response : "+response);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            // Tangani jika permintaan gagal
+                            System.out.println("Kesalahan "+t);
+                        }
+                    });
+
+
 
                     relativeLayoutCustomer.setVisibility(View.GONE);
                     relativeLayoutPesanan.setVisibility(View.VISIBLE);
@@ -385,6 +424,8 @@ public class Tab1 extends Fragment {
                     textViewExtraCc.setText("Dibawah 2000cc");
 
                 }
+
+                editTextEmail.setText(String.valueOf(UserManager.getInstance().getEmail()));
 
                 System.out.println(pemesananModel.getExtra() +" "+pemesananModel.getHarga());
                 relativeLayoutCc.setVisibility(View.GONE);

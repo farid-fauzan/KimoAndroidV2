@@ -132,7 +132,13 @@ public class LoginActivity extends AppCompatActivity {
                                                 if (responseHandler.isStatus()) { // Memeriksa status respons
                                                     JsonObject dataObject = responseData.getAsJsonObject();
                                                     // Set User
+                                                    System.out.println("object : "+dataObject);
                                                     UserManager.getInstance().setIdUser(Long.valueOf(dataObject.get("idUser").getAsLong()));
+                                                    System.out.println("emaaaail : "+dataObject.get("email").getAsString());
+                                                    UserManager.getInstance().setEmail(String.valueOf(dataObject.get("email").getAsString()));
+                                                    UserManager.getInstance().setPhone(String.valueOf(dataObject.get("phone").getAsString()));
+                                                    UserManager.getInstance().setName(String.valueOf(dataObject.get("name").getAsString()));
+
                                                 }
                                             }
                                         }
